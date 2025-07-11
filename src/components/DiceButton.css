@@ -1,0 +1,206 @@
+.dice-button {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(0, 30, 60, 0.8),
+    rgba(0, 20, 40, 0.6)
+  );
+  border: none;
+  border-radius: 1rem;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(0, 255, 200, 0.2), 0 0 20px rgba(0, 150, 150, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  min-height: 200px;
+  transform: translateY(0);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.dice-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(0, 255, 200, 0.3), 0 0 30px rgba(0, 255, 200, 0.2);
+  background: linear-gradient(
+    145deg,
+    rgba(0, 40, 80, 0.9),
+    rgba(0, 30, 60, 0.7)
+  );
+}
+
+.dice-button:hover::before {
+  opacity: 1;
+}
+
+.dice-button:hover::after {
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 255, 200, 0.2) 0%,
+    transparent 70%
+  );
+}
+
+.dice-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(0, 255, 200, 0.2), 0 0 15px rgba(0, 255, 200, 0.15);
+}
+
+.dice-button.rolling {
+  animation: rollAnimation 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.dice-button.rolling::before {
+  animation: borderPulse 0.8s ease-in-out;
+}
+
+.dice-icon {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 200, 0.5));
+  z-index: 2;
+  position: relative;
+}
+
+.dice-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00ffcc;
+  text-align: center;
+  font-family: "Orbitron", monospace;
+  text-shadow: 0 0 5px rgba(0, 255, 200, 0.5);
+  z-index: 2;
+  position: relative;
+}
+
+.dice-sides {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #66ccff;
+  background: rgba(0, 255, 200, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 255, 200, 0.3);
+  font-family: "Exo 2", monospace;
+  text-shadow: 0 0 3px rgba(102, 204, 255, 0.5);
+  z-index: 2;
+  position: relative;
+}
+
+.rolling-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  animation: spin 0.8s linear infinite,
+    hologramFlicker 0.8s ease-in-out infinite;
+  z-index: 3;
+  filter: drop-shadow(0 0 15px #00ffcc);
+}
+
+@keyframes rollAnimation {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02);
+  }
+  75% {
+    transform: translateY(-8px) scale(1.03);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes hologramFlicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes borderPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.dice-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .dice-button {
+    min-height: 140px;
+    padding: 1.25rem;
+  }
+
+  .dice-icon {
+    font-size: 2rem;
+  }
+
+  .dice-name {
+    font-size: 1rem;
+  }
+}
+
+.dice-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem;
+  padding: 2px;
+  background: linear-gradient(45deg, #00ffcc, #0066aa, #00ffcc);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.dice-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 255, 200, 0.1) 0%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}

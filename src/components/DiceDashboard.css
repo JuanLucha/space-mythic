@@ -1,0 +1,103 @@
+.dice-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.roll-history {
+  background: linear-gradient(
+    145deg,
+    rgba(0, 30, 60, 0.9),
+    rgba(0, 20, 40, 0.9)
+  );
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(0, 255, 200, 0.2), 0 0 20px rgba(0, 150, 150, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 200, 0.2);
+  position: relative;
+}
+
+.roll-history::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(45deg, #00ffcc, #0066aa, #00ffcc);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.roll-history h3 {
+  margin: 0 0 1rem 0;
+  color: #00ffcc;
+  font-size: 1.2rem;
+  font-family: "Orbitron", monospace;
+  text-shadow: 0 0 5px rgba(0, 255, 200, 0.5);
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.history-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: rgba(0, 40, 80, 0.3);
+  border-radius: 0.5rem;
+  border-left: 4px solid #00ffcc;
+  transition: all 0.3s ease;
+}
+
+.history-item:hover {
+  background: rgba(0, 60, 120, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.2);
+}
+
+.history-dice {
+  font-weight: 600;
+  color: #66ccff;
+  font-family: "Exo 2", sans-serif;
+}
+
+.history-result {
+  font-weight: 500;
+  color: #00ffcc;
+  text-shadow: 0 0 3px rgba(0, 255, 200, 0.3);
+}
+
+.history-time {
+  font-size: 0.875rem;
+  color: #88ccdd;
+  font-family: "Exo 2", monospace;
+}
+
+@media (max-width: 768px) {
+  .dice-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .history-item {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 0.5rem;
+  }
+}
